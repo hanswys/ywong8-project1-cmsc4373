@@ -1,34 +1,63 @@
 <h2>Balance: $100</h2>
 <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="blue" class="bi bi-circle-fill" viewBox="0 0 16 16">
   <circle cx="8" cy="8" r="8"/>
-  <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="4" dy=".3em">?</text>
+  <text id="number" x="50%" y="50%" text-anchor="middle" fill="white" font-size="4" dy=".3em">?</text>
 </svg>
 
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
-      Default checkbox
-    </label>
-  </div>
-  <div>
-    <h2 class ="text-white bg-primary">Play</h2>
-</div>
 <form>
+  <div style="background-color: lightgray; padding: 10px; border-radius: 5px;">
+    <label for="show-key">Show Key:</label>
+    <input type="checkbox" id="show-key" name="show-key">
+  </div>
+</form>
 
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          Default radio
-        </label>
-      </div>
+  <div>
+    <h2 class ="text-white bg-primary">Choose bet(s) and press [PLAY] </h2>
+</div>
 
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          Default radio
-        </label>
+<form>
+  <div style="background-color: lightgray; padding: 10px; border-radius: 5px;">
+    <label>Bet on Odd/Even (2x winnings)</label>
+    <div>
+      <input type="radio" id="odd" name="bet" value="odd" checked>
+      <label for="odd">odd</label>
+
+      <input type="radio" id="even" name="bet" value="even">
+      <label for="even">even</label>
+
+      <select>
+        <option>Select a bet amount</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+      </select>
+    </div>
+  </div>
+  </form>
+
+  <form>
+    <div style="background-color: lightgray; padding: 10px; border-radius: 5px;">
+      <label>Bet on Range (3x winnings)</label>
+      <div>
+        <input type="radio" id="range1-2" name="bet" value="1-2" checked>
+        <label for="range1-2">1-2</label>
+  
+        <input type="radio" id="range3-4" name="bet" value="3-4">
+        <label for="range3-4">3-4</label>
+  
+        <input type="radio" id="range5-6" name="bet" value="5-6">
+        <label for="range5-6">5-6</label>
+  
+        <select>
+          <option>Select a bet amount</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
       </div>
-    
+    </div>
+  </form>
+  
 
     <button id="button-play-game" class="btn btn-outline-primary">Play</button>
     <button type="sup" class="btn btn-outline-danger">New Game</button>

@@ -20,4 +20,5 @@ export async function homePageView(){
 
         const playButton = divWrapper.querySelector('#button-play-game');
         playButton.onclick = onClickPlayGame;
+        // document.getElementById('number').innerHTML = 'Press New Game to Start';
 }
