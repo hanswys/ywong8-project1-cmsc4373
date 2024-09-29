@@ -4,19 +4,21 @@
   <text id="number" x="50%" y="50%" text-anchor="middle" fill="white" font-size="4" dy=".3em">?</text>
 </svg>
 
-<form>
-  <div style="background-color: lightgray; padding: 10px; border-radius: 5px;">
+  <div class="create-modal d-block" >
     <label for="show-key">Show Key:</label>
+    <label for="show-test">Show TEST</label>
     <input type="checkbox" id="show-key" name="show-key">
   </div>
-</form>
+  
+  
+
 
   <div>
     <h2 id="message" class ="text-white bg-primary">Choose bet(s) and press [PLAY] </h2>
 </div>
 
 <form>
-  <div style="background-color: lightgray; padding: 10px; border-radius: 5px;">
+  <div>
     <label>Bet on Odd/Even (2x winnings)</label>
     <div>
       <input type="radio" id="odd" name="bet" value="odd" checked>
@@ -60,6 +62,6 @@
   
 
     <button id="button-play-game" class="btn btn-outline-primary">Play</button>
-    <button type="sup" class="btn btn-outline-danger">New Game</button>
+    <button id="button-new-game" class="btn btn-outline-danger">New Game</button>
 </form>
 <ul id="display" class="bg-success bg-opacity-25"></ul>
