@@ -1,64 +1,65 @@
 <h2>Balance: $100</h2>
-<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="blue" class="bi bi-circle-fill" viewBox="0 0 16 16">
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="blue" class="bi bi-circle-fill m-3" viewBox="0 0 16 16">
   <circle cx="8" cy="8" r="8"/>
   <text id="number" x="50%" y="50%" text-anchor="middle" fill="white" font-size="4" dy=".3em">?</text>
 </svg>
 
-  <div class="create-modal d-block" >
-    <label for="show-key">Show Key:</label>
-    <label for="show-test">Show TEST</label>
-    <input type="checkbox" id="show-key" name="show-key">
-  </div>
-  
-  
 
+<div class="create-modal">
+  <label for="show-key">Show Key:</label>
+  <input type="checkbox" id="show-key" name="show-key">
+</div>
 
+<div class="create-modal d-none" id="text-area-modal">
+  <label id="cheat-key" for="text-area">VALUE</label>
+</div>
+  
   <div>
     <h2 id="message" class ="text-white bg-primary">Choose bet(s) and press [PLAY] </h2>
 </div>
 
-<form>
+<form id="betForm">
   <div>
     <label>Bet on Odd/Even (2x winnings)</label>
     <div>
       <input type="radio" id="odd" name="bet" value="odd" checked>
-      <label for="odd">odd</label>
+      <label for="odd">Odd</label>
 
       <input type="radio" id="even" name="bet" value="even">
-      <label for="even">even</label>
+      <label for="even">Even</label>
 
-      <select>
-        <option>Select a bet amount</option>
+      <select id="betAmount">
+        <option value="">Select a bet amount</option>
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="30">30</option>
       </select>
     </div>
   </div>
-  </form>
+</form>
 
-  <form>
-    <div style="background-color: lightgray; padding: 10px; border-radius: 5px;">
-      <label>Bet on Range (3x winnings)</label>
-      <div>
-        <input type="radio" id="range1-2" name="bet" value="1-2" checked>
-        <label for="range1-2">1-2</label>
-  
-        <input type="radio" id="range3-4" name="bet" value="3-4">
-        <label for="range3-4">3-4</label>
-  
-        <input type="radio" id="range5-6" name="bet" value="5-6">
-        <label for="range5-6">5-6</label>
-  
-        <select>
-          <option>Select a bet amount</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-        </select>
-      </div>
+<form id="rangeBetForm">
+  <div>
+    <label>Bet on Range (3x winnings)</label>
+    <div>
+      <input type="radio" id="range1-2" name="rangeBet" value="1-2" checked>
+      <label for="range1-2">1-2</label>
+
+      <input type="radio" id="range3-4" name="rangeBet" value="3-4">
+      <label for="range3-4">3-4</label>
+
+      <input type="radio" id="range5-6" name="rangeBet" value="5-6">
+      <label for="range5-6">5-6</label>
+
+      <select id="rangeBetAmount">
+        <option value="">Select a bet amount</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+      </select>
     </div>
-  </form>
+  </div>
+</form>
   
 
     <button id="button-play-game" class="btn btn-outline-primary">Play</button>
