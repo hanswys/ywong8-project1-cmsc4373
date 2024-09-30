@@ -2,10 +2,6 @@ export const GameState = {
     INIT: 0, PLAYING: 1,
 }
 
-export const CheatKey = {
-    ON: 1, OFF: 0,
-}
-
 export class DiceRollgame {
     constructor() {
         this.reset();
@@ -20,10 +16,18 @@ export class DiceRollgame {
                 if (currentValue % 2 != 0) {
                     console.log("correct bet")
                     winnings += betAmount * 2;
+                } else {
+                    console.log("failed bet")
+                    winnings -= betAmount;
                 }
             } else {
-                console.log("failed bet")
-                winnings -= betAmount;
+                if (currentValue % 2 == 0) {
+                    console.log("correct bet")
+                    winnings += betAmount * 2;
+                } else {
+                    console.log("failed bet")
+                    winnings -= betAmount;
+                }
             }
         }
 
@@ -52,7 +56,12 @@ export class DiceRollgame {
         const randomNumber = Math.floor(Math.random() * 6) + 1;
         this.gameState = GameState.INIT;
         this.balance = 100;
-        this.cheatKey = CheatKey.OFF;
+        this.value = randomNumber;
+    }
+
+    newRound(){
+        const randomNumber = Math.floor(Math.random() * 6) + 1;
+        this.gameState = GameState.INIT;
         this.value = randomNumber;
     }
 }
