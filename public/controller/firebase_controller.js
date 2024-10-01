@@ -17,15 +17,16 @@ export async function getAllPlayRecords(email){
     let history = [];
 
     const q = query(
-        collection(db, DiceRollGameCollection),
+        collection(db, DiceRollGameCollection   ),
         where('email', '==', email),
         orderBy('timestamp', 'desc'),
     );
     const snapShot = await getDocs(q);
     snapShot.forEach(doc => {
-        const {email, winner, moves, timestamp} = doc.data();
-        history.push({email, winner, moves, timestamp});
+        const {balance, bet, email, timestamp, win} = doc.data();
+        history.push({balance, bet, email, timestamp, win});
     });
 
     return history;
 }
+
