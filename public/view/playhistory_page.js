@@ -9,7 +9,7 @@ export async function PlayHistoryPageView(){
         root.innerHTML = await protectedView();
         return;
     }
-    root.innerHTML = '<h1>Game Play History Records</h1'; const response = await fetch('/view/templates/playrecord_page_template.html',
+    root.innerHTML = '<h1>Game Play History Records</h1'; const response = await fetch('/view/templates/playhistory_page_template.html',
         { cache: 'no-store' });
     const divWrapper = document.createElement('div');
     divWrapper.innerHTML = await response.text();
@@ -34,19 +34,25 @@ export async function PlayHistoryPageView(){
         </tr>
         `;
     } else {
-        playRecords.forEach(record => tbody.appendChild(buildOnePlayRecordView(record)));
+        playRecords.forEach((record, index) => tbody.appendChild(buildOnePlayRecordView(record, index + 1)));
 
     }
 }
 
-function buildOnePlayRecordView(record) {
+function buildOnePlayRecordView(record, index) {
     const tr = document.createElement('tr');
     tr.innerHTML = `
         <td>
-            ${record.winner}
+            ${index}
+        </td>
+        <td>
+            ${record.bet}
         </td>
           <td>
-            ${record.moves}
+            ${record.win}
+        </td>
+        <td>
+            ${record.balance}
         </td>
           <td>
             ${new Date(record.timestamp).toLocaleString()}
