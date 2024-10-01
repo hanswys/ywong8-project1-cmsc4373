@@ -7,5 +7,5 @@ export async function PlayHistoryPageView(){
         root.innerHTML = await protectedView();
         return;
     }
-    root.innerHTML = '<h1>Menu2 Page</h1';
+    root.innerHTML = '<h1>Game Play History Records</h1';
 }

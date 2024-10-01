@@ -1,5 +1,5 @@
 import { homePageView } from "../view/home_page.js";
-import { PlayHistoryPageView } from "../view/playhistory.js";
+import { PlayHistoryPageView } from "../view/playhistory_page.js";
 import { signOutFirebase } from "./firebase_auth.js";
 import { routePathnames } from "./route_controller.js";
 

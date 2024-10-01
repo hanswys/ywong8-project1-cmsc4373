@@ -1,5 +1,5 @@
 import { homePageView } from "../view/home_page.js"
-import { PlayHistoryPageView } from "../view/playhistory.js"
+import { PlayHistoryPageView } from "../view/playhistory_page.js"
 
 export const routePathnames = {
     HOME: '/',
