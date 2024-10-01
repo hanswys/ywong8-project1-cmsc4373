@@ -30,7 +30,7 @@ export async function PlayHistoryPageView(){
     if (playRecords.length == 0) {
         tbody.innerHTML = `
         <tr>
-            <td colspan = "3" class="text-center fs-3">No play records found!</td>
+            <td colspan = "5" class="text-center fs-3">No play records found!</td>
         </tr>
         `;
     } else {
