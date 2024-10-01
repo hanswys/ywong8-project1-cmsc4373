@@ -9,7 +9,7 @@ export function onClickPlayGame(e) {
 
     const selectedRange = document.querySelector('input[name="rangeBet"]:checked').value;
     const selectedAmount1 = parseInt(document.getElementById('rangeBetAmount').value) || 0;
-    const winnings = game.play(selectedBet, selectedAmount, selectedRange, selectedAmount1);
+    const won = game.play(selectedBet, selectedAmount, selectedRange, selectedAmount1);
     game.gameState = GameState.PLAYING;
     updateWindow();
 

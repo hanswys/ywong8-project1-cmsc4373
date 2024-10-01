@@ -7,7 +7,8 @@ export class DiceRollgame {
         this.reset();
     }
     play(bet, betAmount, rangeBet, rangeBetAmount) {
-        let winnings = 0;
+        let winningsfromBet = 0;
+        let winningsfromRangeBet = 0;
         let currentValue = this.value;
 
         // console.log("model" + bet);
@@ -15,18 +16,18 @@ export class DiceRollgame {
             if (bet == "odd") {
                 if (currentValue % 2 != 0) {
                     console.log("correct bet")
-                    winnings += betAmount * 2;
+                    winningsfromBet += betAmount * 2;
                 } else {
                     console.log("failed bet")
-                    winnings -= betAmount;
+                    winningsfromBet -= betAmount;
                 }
             } else {
                 if (currentValue % 2 == 0) {
                     console.log("correct bet")
-                    winnings += betAmount * 2;
+                    winningsfromBet += betAmount * 2;
                 } else {
                     console.log("failed bet")
-                    winnings -= betAmount;
+                    winningsfromBet -= betAmount;
                 }
             }
         }
@@ -35,20 +36,30 @@ export class DiceRollgame {
             if (rangeBet == "1-2") {
                 // console.log("12")
                 if (currentValue == 1 || currentValue == 2) {
-                    winnings += rangeBetAmount * 3;
+                    winningsfromRangeBet += rangeBetAmount * 3;
+                } else {
+                    winningsfromRangeBet -= rangeBetAmount;
                 }
             } else if (rangeBet == "3-4") {
                 if (currentValue == 3 || currentValue == 4) {
-                    winnings += rangeBetAmount * 3;
+                    winningsfromRangeBet += rangeBetAmount * 3;
+                } else {
+                    winningsfromRangeBet -= rangeBetAmount;
                 }
-                // console.log("34")
             } else {
-                // console.log("56")
-                winnings -= rangeBetAmount;
+                if (currentValue == 5 || currentValue == 6) {
+                    winningsfromRangeBet += rangeBetAmount * 3;
+                } else {
+                    winningsfromRangeBet -= rangeBetAmount;
+                }
             }
         }
 
-        this.balance += winnings;
+        this.balance += winningsfromBet;
+        this.balance += winningsfromRangeBet;
+        this.amountWonFromOdds = winningsfromBet;
+        this.amountWonFromRange = winningsfromRangeBet;
+
 
     }
 

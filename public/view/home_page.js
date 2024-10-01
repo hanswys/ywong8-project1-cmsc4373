@@ -51,21 +51,38 @@ export function updateWindow() {
             const selectedAmount = betAmount.value;
             const selectedRange = document.querySelector('input[name="rangeBet"]:checked').value;
             const selectedAmount1 = rangeBetAmount.value;
-            // console.log("balance after betting" + game.balance);
             document.getElementById('balance').innerHTML = `Balance: ${game.balance}`;
-            if(selectedAmount1 == 0){
-                // add win lose amounts 
-                document.getElementById('message').innerHTML = `
-                TEST <br>
-                No bet on range
-                `;
-            } else if (selectedAmount == 0){
-                // same here
-                    document.getElementById('message').innerHTML = `
-                    No bet on odd/even <br>
-                    Test
-                    `;
+            document.getElementById('message').innerHTML = "";
+            console.log(game.amountWonFromRange)
+            
+            if(game.amountWonFromOdds > 0){
+            document.getElementById('message').innerHTML += `
+            You won $${game.amountWonFromOdds} on ${selectedBet} <br>
+            `;
+            } else if (game.amountWonFromOdds < 0){
+            document.getElementById('message').innerHTML += `
+            You lost $${game.amountWonFromOdds * -1} on ${selectedBet} <br>
+            `;
+            } else {
+            document.getElementById('message').innerHTML += `
+            No bet on odds/even <br>
+            `;
             }
+
+            if(game.amountWonFromRange > 0){
+                document.getElementById('message').innerHTML += `
+                You won $${game.amountWonFromRange} on ${selectedRange} <br>
+                `;
+                } else if (game.amountWonFromRange < 0){
+                document.getElementById('message').innerHTML += `
+                You lost $${game.amountWonFromRange * -1} on ${selectedRange} <br>
+                `;
+                } else {
+                document.getElementById('message').innerHTML += `
+                No bet on range <br>
+                `;
+    
+                }
             playButton.disabled = true;
             newButton.disabled = false;
             break;
