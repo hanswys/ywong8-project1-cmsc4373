@@ -3,6 +3,7 @@ import { currentUser } from "../controller/firebase_auth.js";
 import { protectedView } from "./protected_view.js";
 import { DEV } from "../model/constants.js";
 import { getAllPlayRecords } from "../controller/firebase_controller.js";
+import { onClickClearHistory } from "../controller/playhistory_controller.js";
 
 export async function PlayHistoryPageView(){
     if (!currentUser){
@@ -14,7 +15,10 @@ export async function PlayHistoryPageView(){
     const divWrapper = document.createElement('div');
     divWrapper.innerHTML = await response.text();
     divWrapper.classList.add('m-4', 'p-4')
-    root.innerHTML = '';
+
+    const clearButton = divWrapper.querySelector('#button-clear-history');
+    clearButton.onclick = onClickClearHistory;
+
     root.appendChild(divWrapper);
 
     let playRecords;

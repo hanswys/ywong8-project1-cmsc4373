@@ -1,7 +1,7 @@
 import {
     getFirestore,
     collection, addDoc,
-    query, where, orderBy, getDocs,
+    query, where, orderBy, getDocs, deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js"
 
 import { app } from "./firebase_core.js";
@@ -17,7 +17,7 @@ export async function getAllPlayRecords(email){
     let history = [];
 
     const q = query(
-        collection(db, DiceRollGameCollection   ),
+        collection(db, DiceRollGameCollection),
         where('email', '==', email),
         orderBy('timestamp', 'desc'),
     );
@@ -30,3 +30,18 @@ export async function getAllPlayRecords(email){
     return history;
 }
 
+export async function deleteHistory(email) {
+    const q = query(
+        collection(db, DiceRollGameCollection),
+        where('email', '==', email)
+    );
+
+    const snapShot = await getDocs(q);
+
+    snapShot.forEach(async (doc) => {
+        await deleteDoc(doc.ref); // Await the delete operation
+    });
+
+
+    console.log(`Records for email ${email} have been deleted.`);
+}

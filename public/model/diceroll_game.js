@@ -4,7 +4,8 @@ export const GameState = {
 
 export class DiceRollgame {
     constructor() {
-        this.reset();
+        this.balance = 100;
+        this.newRound();
     }
     play(bet, betAmount, rangeBet, rangeBetAmount) {
         let winningsfromBet = 0;
@@ -63,12 +64,12 @@ export class DiceRollgame {
 
     }
 
-    reset() {
-        const randomNumber = Math.floor(Math.random() * 6) + 1;
-        this.gameState = GameState.INIT;
-        this.balance = 100;
-        this.value = randomNumber;
-    }
+    // reset() {
+    //     const randomNumber = Math.floor(Math.random() * 6) + 1;
+    //     this.gameState = GameState.INIT;
+    //     this.balance = 100;
+    //     this.value = randomNumber;
+    // }
 
     newRound(){
         const randomNumber = Math.floor(Math.random() * 6) + 1;
