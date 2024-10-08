@@ -1,8 +1,8 @@
 import { currentUser } from "../controller/firebase_auth.js";
 import { root } from "./element.js";
 import { protectedView } from "./protected_view.js";
-import { onClickNewGame, onClickPlayGame, onShowKey } from "../controller/home_controller.js";
-import { DiceRollgame, GameState } from "../model/diceroll_game.js";
+import { onClickNewGame, onClickPlayGame, onShowKey, showTextArea, hideTextArea, onChangeBetAmountForm,  } from "../controller/home_controller.js";
+import { CheckedKey, DiceRollgame, GameState } from "../model/diceroll_game.js";
 
 export let game = new DiceRollgame();
 
@@ -24,17 +24,15 @@ export async function homePageView() {
     const newButton = divWrapper.querySelector('#button-new-game');
     newButton.onclick = onClickNewGame;
 
-    // const showKeyCheckbox = divWrapper.querySelector('#show-key');
-    // const textAreaModal = divWrapper.querySelector('#text-area-modal');
-    // const odd = divWrapper.querySelector('#odd');
-    // const even = divWrapper.querySelector('#even');
-    // const betAmt = divWrapper.querySelector('#betAmount');
+    const showKeyCheckbox = divWrapper.querySelector('#show-key');
+    showKeyCheckbox.onchange = onShowKey;
 
+    const betAmountForm = divWrapper.querySelector('#betAmount');
+    betAmountForm.onchange = onChangeBetAmountForm;
 
 
     root.innerHTML = '';
     root.appendChild(divWrapper);
-
 
     updateWindow();
 
@@ -44,32 +42,41 @@ export async function homePageView() {
 export function updateWindow() {
     const playButton = document.querySelector('#button-play-game');
     const newButton = document.querySelector('#button-new-game');
-    const showKeyCheckbox = document.querySelector('#show-key');
-    const selectedBet = document.querySelector('input[name="bet"]:checked').value;
-    const selectedAmount = betAmount.value;
-    const selectedRange = document.querySelector('input[name="rangeBet"]:checked').value;
-    const selectedAmount1 = rangeBetAmount.value;
-    const betAmountSelect = document.querySelector('#betAmount');
+    // const showKeyCheckbox = document.querySelector('#show-key');
+    // const betAmountSelect = document.querySelector('#betAmount');
     switch (game.gameState) {
         case GameState.INIT:
-            betAmountSelect.value = betAmount.value;
-            showKeyCheckbox.onchange = onShowKey;
+            // betAmountSelect.value = betAmount;
             document.getElementById('cheat-key').innerHTML = `${game.value}`;
-            playButton.disabled = false;
             document.getElementById('message').innerHTML = 'Choose bet(s) and press [PLAY] ';
             document.getElementById('number').innerHTML = '?';
-            document.getElementById('cheat-key').innerHTML = `${game.value}`;
+            // document.getElementById('betAmount').innerHTML = game.bet;
+            if(CheckedKey.ON){
+                showTextArea;
+            } else {
+                hideTextArea;
+            }
+            playButton.disabled = false;
             newButton.disabled = true;
-            console.log(selectedAmount);
             break;
         case GameState.PLAYING:
-            showKeyCheckbox.onchange = onShowKey;
+            if(CheckedKey.ON){
+                showTextArea;
+            } else {
+                hideTextArea;
+            }
+            // betAmountSelect.value = betAmount;
+            // showKeyCheckbox.onchange = onShowKey;
+            const selectedBet = document.querySelector('input[name="bet"]:checked').value;
+            const selectedRange = document.querySelector('input[name="rangeBet"]:checked').value;
             document.getElementById('cheat-key').innerHTML = `${game.value}`;
             document.getElementById('number').innerHTML = `${game.value}`;
             document.getElementById('balance').innerHTML = `Balance: ${game.balance}`;
             document.getElementById('message').innerHTML = "";
-            console.log(selectedAmount);
-
+            playButton.disabled = true;
+            newButton.disabled = false;
+            break;
+        case GameState.OVER:
             if (game.amountWonFromOdds > 0) {
                 document.getElementById('message').innerHTML += `
             You won $${game.amountWonFromOdds} on ${selectedBet} <br>
@@ -98,8 +105,8 @@ export function updateWindow() {
                 `;
 
             }
-            playButton.disabled = true;
-            newButton.disabled = false;
+            playButton.disabled = false;
+            newButton.disabled = true;
             break;
     }
 }

@@ -1,12 +1,16 @@
 export const GameState = {
-    INIT: 0, PLAYING: 1,
+    INIT: 0, PLAYING: 1, OVER: 2
+}
+
+export const CheckedKey = {
+    OFF: 0, ON: 1
 }
 
 export class DiceRollgame {
     constructor() {
-        this.balance = 100;
-        this.newRound();
+        this.reset();
     }
+
     play(bet, betAmount, rangeBet, rangeBetAmount) {
         let winningsfromBet = 0;
         let winningsfromRangeBet = 0;
@@ -64,16 +68,27 @@ export class DiceRollgame {
 
     }
 
-    // reset() {
-    //     const randomNumber = Math.floor(Math.random() * 6) + 1;
-    //     this.gameState = GameState.INIT;
-    //     this.balance = 100;
-    //     this.value = randomNumber;
-    // }
+    reset() {
+        const randomNumber = Math.floor(Math.random() * 6) + 1;
+        this.gameState = GameState.INIT;
+        this.balance = 100;
+        this.value = randomNumber;
+        this.checkedKeyState = CheckedKey.OFF;
+        this.betAmount;
+    }
 
     newRound(){
         const randomNumber = Math.floor(Math.random() * 6) + 1;
         this.gameState = GameState.INIT;
         this.value = randomNumber;
     }
+
+    checkedKeyOn(){
+        this.checkedKeyState = CheckedKey.ON;
+    }
+
+    checkedKeyOff(){
+        this.checkedKeyState = CheckedKey.OFF;
+    }
+
 }

@@ -39,7 +39,7 @@ export async function deleteHistory(email) {
     const snapShot = await getDocs(q);
 
     snapShot.forEach(async (doc) => {
-        await deleteDoc(doc.ref); // Await the delete operation
+        await deleteDoc(doc.ref); 
     });
 
 
