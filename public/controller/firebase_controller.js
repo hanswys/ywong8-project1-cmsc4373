@@ -41,7 +41,4 @@ export async function deleteHistory(email) {
     snapShot.forEach(async (doc) => {
         await deleteDoc(doc.ref); 
     });
-
-
-    console.log(`Records for email ${email} have been deleted.`);
 }

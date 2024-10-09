@@ -1,9 +1,10 @@
 import { currentUser } from "../controller/firebase_auth.js";
 import { root } from "./element.js";
 import { protectedView } from "./protected_view.js";
-import { onClickNewGame, onClickPlayGame, onShowKey, showTextArea, hideTextArea, onChangeBetAmountForm, onChangeRangeBetAmountForm,
+import {
+    onClickNewGame, onClickPlayGame, onShowKey, showTextArea, hideTextArea, onChangeBetAmountForm, onChangeRangeBetAmountForm,
     onChangeOdd, onChangeEven, onChangeRange1, onChangeRange2, onChangeRange3
- } from "../controller/home_controller.js";
+} from "../controller/home_controller.js";
 import { CheckedKey, CheckedRange, DiceRollgame, GameState } from "../model/diceroll_game.js";
 
 export let game = new DiceRollgame();
@@ -73,11 +74,11 @@ export function updateWindow() {
     switch (game.gameState) {
         case GameState.INIT:
             console.log("init");
-            if(game.CheckedRange == CheckedRange.RANGE1){
+            if (game.CheckedRange == CheckedRange.RANGE1) {
                 range1Radio.checked = true;
                 range2Radio.checked = false;
                 range3Radio.checked = false;
-            } else if(game.CheckedRange == CheckedRange.RANGE2){
+            } else if (game.CheckedRange == CheckedRange.RANGE2) {
                 range1Radio.checked = false;
                 range2Radio.checked = true;
                 range3Radio.checked = false;
@@ -103,16 +104,23 @@ export function updateWindow() {
             } else {
                 hideTextArea;
             }
+            betAmount.disabled = false;
+            rangeBetAmount.disabled = false;
+            oddRadio.disabled = false;
+            evenRadio.disabled = false;
+            range1Radio.disabled = false;
+            range2Radio.disabled = false;
+            range3Radio.disabled = false;
             playButton.disabled = true;
             newButton.disabled = true;
             break;
         case GameState.PLAYING:
             console.log("playing");
-            if(game.CheckedRange == CheckedRange.RANGE1){
+            if (game.CheckedRange == CheckedRange.RANGE1) {
                 range1Radio.checked = true;
                 range2Radio.checked = false;
                 range3Radio.checked = false;
-            } else if(game.CheckedRange == CheckedRange.RANGE2){
+            } else if (game.CheckedRange == CheckedRange.RANGE2) {
                 range1Radio.checked = false;
                 range2Radio.checked = true;
                 range3Radio.checked = false;
@@ -143,11 +151,13 @@ export function updateWindow() {
             newButton.disabled = true;
             break;
         case GameState.OVER:
-            if(game.CheckedRange == CheckedRange.RANGE1){
+            const selectedBet = document.querySelector('input[name="bet"]:checked').value;
+            const selectedRange = document.querySelector('input[name="rangeBet"]:checked').value;
+            if (game.CheckedRange == CheckedRange.RANGE1) {
                 range1Radio.checked = true;
                 range2Radio.checked = false;
                 range3Radio.checked = false;
-            } else if(game.CheckedRange == CheckedRange.RANGE2){
+            } else if (game.CheckedRange == CheckedRange.RANGE2) {
                 range1Radio.checked = false;
                 range2Radio.checked = true;
                 range3Radio.checked = false;
@@ -172,11 +182,11 @@ export function updateWindow() {
             document.getElementById('message').innerHTML = "";
             if (game.amountWonFromOdds > 0) {
                 document.getElementById('message').innerHTML += `
-            You won $${game.amountWonFromOdds} on ${game.betAmount} <br>
+            You won $${game.amountWonFromOdds} on ${selectedBet} <br>
             `;
             } else if (game.amountWonFromOdds < 0) {
                 document.getElementById('message').innerHTML += `
-            You lost $${game.amountWonFromOdds * -1} on ${game.betAmount} <br>
+            You lost $${game.amountWonFromOdds * -1} on ${selectedBet} <br>
             `;
             } else {
                 document.getElementById('message').innerHTML += `
@@ -186,11 +196,11 @@ export function updateWindow() {
 
             if (game.amountWonFromRange > 0) {
                 document.getElementById('message').innerHTML += `
-                You won $${game.amountWonFromRange} on ${game.rangeBetAmount} <br>
+                You won $${game.amountWonFromRange} on ${selectedRange} <br>
                 `;
             } else if (game.amountWonFromRange < 0) {
                 document.getElementById('message').innerHTML += `
-                You lost $${game.amountWonFromRange * -1} on ${game.rangeBetAmount} <br>
+                You lost $${game.amountWonFromRange * -1} on ${selectedRange} <br>
                 `;
             } else {
                 document.getElementById('message').innerHTML += `
@@ -198,6 +208,13 @@ export function updateWindow() {
                 `;
 
             }
+            betAmount.disabled = true;
+            rangeBetAmount.disabled = true;
+            oddRadio.disabled = true;
+            evenRadio.disabled = true;
+            range1Radio.disabled = true;
+            range2Radio.disabled = true;
+            range3Radio.disabled = true;
             playButton.disabled = true;
             newButton.disabled = false;
             break;
