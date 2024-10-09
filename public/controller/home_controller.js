@@ -1,4 +1,4 @@
-import { GameState } from "../model/diceroll_game.js";
+import { CheckedRange, GameState } from "../model/diceroll_game.js";
 import { game, updateWindow } from "../view/home_page.js";
 import { currentUser } from "./firebase_auth.js";
 import { DEV } from "../model/constants.js";
@@ -9,7 +9,6 @@ export async function onClickPlayGame(e) {
     e.preventDefault();
     const selectedBet = document.querySelector('input[name="bet"]:checked').value;
     const selectedAmount = parseInt(document.getElementById('betAmount').value) || 0;
-
     const selectedRange = document.querySelector('input[name="rangeBet"]:checked').value;
     const selectedAmount1 = parseInt(document.getElementById('rangeBetAmount').value) || 0;
     const won = game.play(selectedBet, selectedAmount, selectedRange, selectedAmount1);
@@ -80,5 +79,52 @@ export async function savePlayRecord(){
 
 export function onChangeBetAmountForm(){
     const selectedBet = document.querySelector('#betAmount').value;
-    console.log(selectedBet);
+    const selectedRangeBet = document.querySelector('#rangeBetAmount').value;
+    game.betAmount = selectedBet;
+    game.rangeBetAmount = selectedRangeBet;
+    if (selectedBet != 0 || selectedRangeBet != 0){
+        game.gameState = GameState.PLAYING;
+    } else {
+        game.gameState = GameState.INIT;
+    }
+    updateWindow();
 }
+
+export function onChangeRangeBetAmountForm(){
+    const selectedBet = document.querySelector('#betAmount').value;
+    const selectedRangeBet = document.querySelector('#rangeBetAmount').value;
+    game.betAmount = selectedBet;
+    game.rangeBetAmount = selectedRangeBet;
+    if (selectedBet != 0 || selectedRangeBet != 0){
+        game.gameState = GameState.PLAYING;
+    } else {
+        game.gameState = GameState.INIT;
+    }
+    updateWindow();
+}
+
+export function onChangeOdd(){
+    game.oddChecked = true;
+    updateWindow();
+}
+
+export function onChangeEven(){
+    game.oddChecked = false;
+    updateWindow();
+}
+export function onChangeRange1(){
+    game.CheckedRange = CheckedRange.RANGE1;
+    updateWindow();
+}
+
+export function onChangeRange2(){
+    game.CheckedRange = CheckedRange.RANGE2;
+    updateWindow();
+}
+
+export function onChangeRange3(){
+    game.CheckedRange = CheckedRange.RANGE3;
+    updateWindow();
+}
+
+

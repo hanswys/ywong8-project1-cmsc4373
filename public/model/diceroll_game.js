@@ -6,6 +6,10 @@ export const CheckedKey = {
     OFF: 0, ON: 1
 }
 
+export const CheckedRange = {
+    RANGE1: 0, RANGE2: 1, RANGE3: 2
+}
+
 export class DiceRollgame {
     constructor() {
         this.reset();
@@ -74,13 +78,21 @@ export class DiceRollgame {
         this.balance = 100;
         this.value = randomNumber;
         this.checkedKeyState = CheckedKey.OFF;
-        this.betAmount;
+        this.betAmount = "";
+        this.rangeBetAmount = "";
+        this.oddChecked = true;
+        this.CheckedRange = CheckedRange.RANGE1;
     }
 
     newRound(){
         const randomNumber = Math.floor(Math.random() * 6) + 1;
         this.gameState = GameState.INIT;
         this.value = randomNumber;
+        this.betAmount = "";
+        this.rangeBetAmount = "";
+        this.oddChecked = true;
+        this.CheckedRange = CheckedRange.RANGE1;
+
     }
 
     checkedKeyOn(){
