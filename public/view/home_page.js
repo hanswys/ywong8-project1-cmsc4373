@@ -121,7 +121,6 @@ export function updateWindow() {
                 range2Radio.checked = false;
                 range3Radio.checked = true;
             }
-            // evenRadio.checked = true;
             if (game.oddChecked == true) {
                 oddRadio.checked = true;
                 evenRadio.checked = false;
@@ -144,6 +143,19 @@ export function updateWindow() {
             newButton.disabled = true;
             break;
         case GameState.OVER:
+            if(game.CheckedRange == CheckedRange.RANGE1){
+                range1Radio.checked = true;
+                range2Radio.checked = false;
+                range3Radio.checked = false;
+            } else if(game.CheckedRange == CheckedRange.RANGE2){
+                range1Radio.checked = false;
+                range2Radio.checked = true;
+                range3Radio.checked = false;
+            } else {
+                range1Radio.checked = false;
+                range2Radio.checked = false;
+                range3Radio.checked = true;
+            }
             if (game.oddChecked == true) {
                 oddRadio.checked = true;
                 evenRadio.checked = false;
@@ -151,41 +163,43 @@ export function updateWindow() {
                 evenRadio.checked = true;
                 oddRadio.checked = false;
             }
-            // console.log("over")
+            console.log("over")
+            betAmount.value = game.betAmount;
+            rangeBetAmount.value = game.rangeBetAmount;
             // const selectedBet = document.querySelector('input[name="bet"]:checked').value;
             // const selectedRange = document.querySelector('input[name="rangeBet"]:checked').value;
-            // document.getElementById('cheat-key').innerHTML = `${game.value}`;
-            // document.getElementById('number').innerHTML = `${game.value}`;
-            // document.getElementById('balance').innerHTML = `Balance: ${game.balance}`;
-            // document.getElementById('message').innerHTML = "";
-            // if (game.amountWonFromOdds > 0) {
-            //     document.getElementById('message').innerHTML += `
-            // You won $${game.amountWonFromOdds} on ${selectedBet} <br>
-            // `;
-            // } else if (game.amountWonFromOdds < 0) {
-            //     document.getElementById('message').innerHTML += `
-            // You lost $${game.amountWonFromOdds * -1} on ${selectedBet} <br>
-            // `;
-            // } else {
-            //     document.getElementById('message').innerHTML += `
-            // No bet on odds/even <br>
-            // `;
-            // }
+            document.getElementById('cheat-key').innerHTML = `${game.value}`;
+            document.getElementById('number').innerHTML = `${game.value}`;
+            document.getElementById('balance').innerHTML = `Balance: ${game.balance}`;
+            document.getElementById('message').innerHTML = "";
+            if (game.amountWonFromOdds > 0) {
+                document.getElementById('message').innerHTML += `
+            You won $${game.amountWonFromOdds} on ${game.betAmount} <br>
+            `;
+            } else if (game.amountWonFromOdds < 0) {
+                document.getElementById('message').innerHTML += `
+            You lost $${game.amountWonFromOdds * -1} on ${game.betAmount} <br>
+            `;
+            } else {
+                document.getElementById('message').innerHTML += `
+            No bet on odds/even <br>
+            `;
+            }
 
-            // if (game.amountWonFromRange > 0) {
-            //     document.getElementById('message').innerHTML += `
-            //     You won $${game.amountWonFromRange} on ${selectedRange} <br>
-            //     `;
-            // } else if (game.amountWonFromRange < 0) {
-            //     document.getElementById('message').innerHTML += `
-            //     You lost $${game.amountWonFromRange * -1} on ${selectedRange} <br>
-            //     `;
-            // } else {
-            //     document.getElementById('message').innerHTML += `
-            //     No bet on range <br>
-            //     `;
+            if (game.amountWonFromRange > 0) {
+                document.getElementById('message').innerHTML += `
+                You won $${game.amountWonFromRange} on ${game.rangeBetAmount} <br>
+                `;
+            } else if (game.amountWonFromRange < 0) {
+                document.getElementById('message').innerHTML += `
+                You lost $${game.amountWonFromRange * -1} on ${game.rangeBetAmount} <br>
+                `;
+            } else {
+                document.getElementById('message').innerHTML += `
+                No bet on range <br>
+                `;
 
-            // }
+            }
             playButton.disabled = true;
             newButton.disabled = false;
             break;
