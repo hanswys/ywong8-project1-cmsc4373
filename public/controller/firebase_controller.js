@@ -6,7 +6,7 @@ import {
 
 import { app } from "./firebase_core.js";
 
-const DiceRollGameCollection  = 'diceroll_game';
+const DiceRollGameCollection  = 'dicegame_collection';
 const db = getFirestore(app);
 
 export async function addDiceRollGameRecord(gameRecord){
