@@ -6,7 +6,6 @@ import { PlayHistoryPageView } from "../view/playhistory_page.js";
 export async function onClickClearHistory(e){
     const email = currentUser.email;
     e.preventDefault();
-    console.log("hi");
     if (!confirm("Confirm to delete the reply?")) return;
     try {
         await deleteHistory(email);

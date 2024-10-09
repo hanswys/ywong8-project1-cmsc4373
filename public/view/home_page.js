@@ -166,8 +166,6 @@ export function updateWindow() {
             console.log("over")
             betAmount.value = game.betAmount;
             rangeBetAmount.value = game.rangeBetAmount;
-            // const selectedBet = document.querySelector('input[name="bet"]:checked').value;
-            // const selectedRange = document.querySelector('input[name="rangeBet"]:checked').value;
             document.getElementById('cheat-key').innerHTML = `${game.value}`;
             document.getElementById('number').innerHTML = `${game.value}`;
             document.getElementById('balance').innerHTML = `Balance: ${game.balance}`;
