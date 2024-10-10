@@ -69,6 +69,7 @@ export function updateWindow() {
     const range1Radio = document.querySelector('#range1-2');
     const range2Radio = document.querySelector('#range3-4');
     const range3Radio = document.querySelector('#range5-6');
+    const showKeyCheckbox = document.querySelector('#show-key');
 
 
     switch (game.gameState) {
@@ -100,8 +101,10 @@ export function updateWindow() {
             document.getElementById('message').innerHTML = 'Choose bet(s) and press [PLAY] ';
             document.getElementById('number').innerHTML = '?';
             if (game.checkedKeyState == CheckedKey.ON) {
+            showKeyCheckbox.checked = true;
             document.getElementById('key-value').innerHTML = `Game Key: ${game.value}`;
             } else {
+            showKeyCheckbox.checked = false;
             document.getElementById('key-value').innerHTML = ``;
             }
             betAmount.disabled = false;
@@ -141,8 +144,10 @@ export function updateWindow() {
             document.getElementById('message').innerHTML = 'Choose bet(s) and press [PLAY] ';
             document.getElementById('number').innerHTML = '?';
             if (game.checkedKeyState == CheckedKey.ON) {
+                showKeyCheckbox.checked = true;
                 document.getElementById('key-value').innerHTML = `Game Key: ${game.value}`;
                 } else {
+                showKeyCheckbox.checked = false;
                 document.getElementById('key-value').innerHTML = ``;
                 }
 
@@ -150,8 +155,6 @@ export function updateWindow() {
             newButton.disabled = true;
             break;
         case GameState.OVER:
-            const selectedBet = document.querySelector('input[name="bet"]:checked').value;
-            const selectedRange = document.querySelector('input[name="rangeBet"]:checked').value;
             if (game.CheckedRange == CheckedRange.RANGE1) {
                 range1Radio.checked = true;
                 range2Radio.checked = false;
@@ -180,31 +183,53 @@ export function updateWindow() {
             document.getElementById('message').innerHTML = "";
 
             if (game.checkedKeyState == CheckedKey.ON) {
+                showKeyCheckbox.checked = true;
                 document.getElementById('key-value').innerHTML = `Game Key: ${game.value}`;
                 } else {
+                showKeyCheckbox.checked = false;
                 document.getElementById('key-value').innerHTML = ``;
                 }
+                
             if (game.amountWonFromOdds > 0) {
-                document.getElementById('message').innerHTML += `
-            You won $${game.amountWonFromOdds} on ${selectedBet} <br>
+                if(game.oddChecked == true){
+                    document.getElementById('message').innerHTML += `
+            You won $${game.amountWonFromOdds} on odd <br>
             `;
+                } else{
+                    document.getElementById('message').innerHTML += `
+            You won $${game.amountWonFromOdds} on even <br>
+            `;
+                }
             } else if (game.amountWonFromOdds < 0) {
+                if(game.oddChecked == true){
+                    document.getElementById('message').innerHTML += `
+            You lost $${game.amountWonFromOdds * -1} on odd <br>
+            `;
+                }
                 document.getElementById('message').innerHTML += `
-            You lost $${game.amountWonFromOdds * -1} on ${selectedBet} <br>
+            You lost $${game.amountWonFromOdds * -1} on even <br>
             `;
             } else {
                 document.getElementById('message').innerHTML += `
             No bet on odds/even <br>
             `;
             }
+            let rangeText = "";
+            if(game.CheckedRange = CheckedRange.RANGE1){
+                rangeText = "range 1-2";
+            } else if(game.CheckedRange = CheckedRange.RANGE2){
+                rangeText = "range 3-4";
+            } else {
+                rangeText = "range 4-5";
+            }
 
             if (game.amountWonFromRange > 0) {
                 document.getElementById('message').innerHTML += `
-                You won $${game.amountWonFromRange} on ${selectedRange} <br>
+                You won $${game.amountWonFromRange} on ${rangeText} <br>
                 `;
             } else if (game.amountWonFromRange < 0) {
                 document.getElementById('message').innerHTML += `
-                You lost $${game.amountWonFromRange * -1} on ${selectedRange} <br>
+                You lost $${game.amountWonFromRange * -1} on ${rangeText} <br>
                 `;
             } else {
                 document.getElementById('message').innerHTML += `
