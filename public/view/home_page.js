@@ -98,6 +98,7 @@ export function updateWindow() {
                 oddRadio.checked = false;
             }
             // document.getElementById('key-va;ue').innerHTML = `${game.value}`;
+            document.getElementById('balance').innerHTML = `Balance: ${game.balance}`;
             document.getElementById('message').innerHTML = 'Choose bet(s) and press [PLAY] ';
             document.getElementById('number').innerHTML = '?';
             if (game.checkedKeyState == CheckedKey.ON) {
@@ -141,6 +142,7 @@ export function updateWindow() {
             }
             betAmount.value = game.betAmount;
             rangeBetAmount.value = game.rangeBetAmount;
+            document.getElementById('balance').innerHTML = `Balance: ${game.balance}`;
             document.getElementById('message').innerHTML = 'Choose bet(s) and press [PLAY] ';
             document.getElementById('number').innerHTML = '?';
             if (game.checkedKeyState == CheckedKey.ON) {
