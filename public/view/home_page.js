@@ -2,7 +2,7 @@ import { currentUser } from "../controller/firebase_auth.js";
 import { root } from "./element.js";
 import { protectedView } from "./protected_view.js";
 import {
-    onClickNewGame, onClickPlayGame, onShowKey, showTextArea, hideTextArea, onChangeBetAmountForm, onChangeRangeBetAmountForm,
+    onClickNewGame, onClickPlayGame, onShowKey, onChangeBetAmountForm, onChangeRangeBetAmountForm,
     onChangeOdd, onChangeEven, onChangeRange1, onChangeRange2, onChangeRange3
 } from "../controller/home_controller.js";
 import { CheckedKey, CheckedRange, DiceRollgame, GameState } from "../model/diceroll_game.js";
@@ -96,13 +96,13 @@ export function updateWindow() {
                 evenRadio.checked = true;
                 oddRadio.checked = false;
             }
-            document.getElementById('cheat-key').innerHTML = `${game.value}`;
+            // document.getElementById('key-va;ue').innerHTML = `${game.value}`;
             document.getElementById('message').innerHTML = 'Choose bet(s) and press [PLAY] ';
             document.getElementById('number').innerHTML = '?';
-            if (CheckedKey.ON) {
-                showTextArea;
+            if (game.checkedKeyState == CheckedKey.ON) {
+            document.getElementById('key-value').innerHTML = `Game Key: ${game.value}`;
             } else {
-                hideTextArea;
+            document.getElementById('key-value').innerHTML = ``;
             }
             betAmount.disabled = false;
             rangeBetAmount.disabled = false;
@@ -138,14 +138,13 @@ export function updateWindow() {
             }
             betAmount.value = game.betAmount;
             rangeBetAmount.value = game.rangeBetAmount;
-            document.getElementById('cheat-key').innerHTML = `${game.value}`;
             document.getElementById('message').innerHTML = 'Choose bet(s) and press [PLAY] ';
             document.getElementById('number').innerHTML = '?';
-            if (CheckedKey.ON) {
-                showTextArea;
-            } else {
-                hideTextArea;
-            }
+            if (game.checkedKeyState == CheckedKey.ON) {
+                document.getElementById('key-value').innerHTML = `Game Key: ${game.value}`;
+                } else {
+                document.getElementById('key-value').innerHTML = ``;
+                }
 
             playButton.disabled = false;
             newButton.disabled = true;
@@ -176,10 +175,15 @@ export function updateWindow() {
             console.log("over")
             betAmount.value = game.betAmount;
             rangeBetAmount.value = game.rangeBetAmount;
-            document.getElementById('cheat-key').innerHTML = `${game.value}`;
             document.getElementById('number').innerHTML = `${game.value}`;
             document.getElementById('balance').innerHTML = `Balance: ${game.balance}`;
             document.getElementById('message').innerHTML = "";
+
+            if (game.checkedKeyState == CheckedKey.ON) {
+                document.getElementById('key-value').innerHTML = `Game Key: ${game.value}`;
+                } else {
+                document.getElementById('key-value').innerHTML = ``;
+                }
             if (game.amountWonFromOdds > 0) {
                 document.getElementById('message').innerHTML += `
             You won $${game.amountWonFromOdds} on ${selectedBet} <br>

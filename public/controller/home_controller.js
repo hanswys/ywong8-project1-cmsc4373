@@ -1,4 +1,4 @@
-import { CheckedRange, GameState } from "../model/diceroll_game.js";
+import { CheckedKey, CheckedRange, GameState } from "../model/diceroll_game.js";
 import { game, updateWindow } from "../view/home_page.js";
 import { currentUser } from "./firebase_auth.js";
 import { DEV } from "../model/constants.js";
@@ -26,27 +26,28 @@ export function onClickNewGame(e) {
 
 export function onShowKey(e) {
     if (e.target.checked) {
-        showTextArea(); 
+        game.checkedKeyState = CheckedKey.ON;
     } else {
-        hideTextArea(); 
+        game.checkedKeyState = CheckedKey.OFF;
     }
+    updateWindow();
 }
 
-export function showTextArea() {
-    const divModals = document.querySelectorAll('.create-modal');
-    const divButton = divModals[0];
-    const divTextArea = divModals[1];
-    divButton.classList.replace('d-block', 'd-none');
-    divTextArea.classList.replace('d-none', 'd-block');
-}
+// export function showTextArea() {
+//     const divModals = document.querySelectorAll('.create-modal');
+//     const divButton = divModals[0];
+//     const divTextArea = divModals[1];
+//     divButton.classList.replace('d-block', 'd-none');
+//     divTextArea.classList.replace('d-none', 'd-block');
+// }
 
-export function hideTextArea() {
-    const divModals = document.querySelectorAll('.create-modal');
-    const divButton = divModals[0];
-    const divTextArea = divModals[1];
-    divButton.classList.replace('d-none', 'd-block');
-    divTextArea.classList.replace('d-block', 'd-none');
-}
+// export function hideTextArea() {
+//     const divModals = document.querySelectorAll('.create-modal');
+//     const divButton = divModals[0];
+//     const divTextArea = divModals[1];
+//     divButton.classList.replace('d-none', 'd-block');
+//     divTextArea.classList.replace('d-block', 'd-none');
+// }
 
 export async function savePlayRecord(){
     const selectedAmount = parseInt(document.getElementById('betAmount').value) || 0;
