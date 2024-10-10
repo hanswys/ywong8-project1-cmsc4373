@@ -215,12 +215,12 @@ export function updateWindow() {
             `;
             }
             let rangeText = "";
-            if(game.CheckedRange = CheckedRange.RANGE1){
+            if(game.CheckedRange == CheckedRange.RANGE1){
                 rangeText = "range 1-2";
-            } else if(game.CheckedRange = CheckedRange.RANGE2){
+            } else if(game.CheckedRange == CheckedRange.RANGE2){
                 rangeText = "range 3-4";
             } else {
-                rangeText = "range 4-5";
+                rangeText = "range 5-6";
             }
 
             if (game.amountWonFromRange > 0) {
