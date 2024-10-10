@@ -205,10 +205,11 @@ export function updateWindow() {
                     document.getElementById('message').innerHTML += `
             You lost $${game.amountWonFromOdds * -1} on odd <br>
             `;
+                } else {
+                    document.getElementById('message').innerHTML += `
+                    You lost $${game.amountWonFromOdds * -1} on even <br>
+                    `;
                 }
-                document.getElementById('message').innerHTML += `
-            You lost $${game.amountWonFromOdds * -1} on even <br>
-            `;
             } else {
                 document.getElementById('message').innerHTML += `
             No bet on odds/even <br>
